@@ -1,0 +1,43 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "targetArchitecture": "arm",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "miDebuggerServerAddress": "${input:remoteIp}:3333",
+            "miDebuggerPath": "/usr/bin/gdb-multiarch",
+            "preLaunchTask": "start_debug",
+            "postDebugTask": "postdebug"
+        },
+    ],
+    "inputs": [
+        {
+            "id": "remoteIp",
+            "type": "command",
+            "command": "extension.commandvariable.file.content",
+            "args": {
+                "fileName": "${workspaceFolder}/scripts/.data/variables",
+                "key": "REMOTE_IP_ADDRESS"
+            }
+        }
+    ]
+}
