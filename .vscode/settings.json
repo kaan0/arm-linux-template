@@ -1,15 +1,10 @@
 {
     "files.associations": {
-        "system_error": "cpp",
-        "sstream": "cpp",
-        "iostream": "cpp",
-        "chrono": "cpp"
     },
 
     "C_Cpp.default.includePath": [ "${workspaceFolder}/include" ],
     
     "cmake.configureOnOpen": true,
-    "cmake.installPrefix": "",
     "cmake.sourceDirectory": "${workspaceFolder}",
     "cmake.configureArgs": [
         "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/cross.cmake"

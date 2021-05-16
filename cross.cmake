@@ -1,22 +1,28 @@
+#
+# Cmake cross compile toolchain for raspberry pi 4 64-bit
+#
+
+#Target operating system and architecture
 set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR arm)
-#set(CMAKE_CXX_STANDARD 11)
-#set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
+set(TARGET_PREFIX aarch64-poky-linux)
 
-#set(toolchain_path /opt/KernelCache/5.9.3_BBB.kernel)
-#set(sysroot_target ${toolchain_path}/tools/gcc-linaro-6.5.0-2018.12-x86_64_arm-linux-gnueabihf/arm-linux-gnueabihf/libc)
-#set(sysroot_target /usr/arm-linux-gnueabihf/)
-#set(tools ${toolchain_path}/tools/gcc-linaro-6.5.0-2018.12-x86_64_arm-linux-gnueabihf/bin)
+#C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_C_COMPILER arm-linux-gnueabihf-gcc)
-set(CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++)
+#sysroot
+set(CMAKE_SYSROOT /opt/poky/3.1.3/sysroots/aarch64-poky-linux)
+set(TARGET_SYSROOT /opt/poky/3.1.3/sysroots/aarch64-poky-linux)
+set(TARGET_TOOLS_DIR /opt/poky/3.1.3/sysroots/x86_64-pokysdk-linux/usr/bin/${TARGET_PREFIX})
 
-SET(CMAKE_CXX_FLAGS " -march=armv7-a -marm -mfpu=neon -mfloat-abi=hard" )
-SET(CMAKE_C_FLAGS ${CMAKE_CXX_FLAGS})
+set(CMAKE_C_COMPILER ${TARGET_TOOLS_DIR}/${TARGET_PREFIX}-gcc)
+set(CMAKE_CXX_COMPILER ${TARGET_TOOLS_DIR}/${TARGET_PREFIX}-g++)
 
-SET(CMAKE_EXE_LINKER_FLAGS " -lpthread")
+SET(CMAKE_CXX_FLAGS " -mcpu=cortex-a72+crc+crypto -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=${TARGET_SYSROOT}" CACHE INTERNAL "" FORCE)
+SET(CMAKE_C_FLAGS ${CMAKE_CXX_FLAGS} CACHE INTERNAL "" FORCE)
 
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
-set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+#set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
