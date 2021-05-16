@@ -20,7 +20,7 @@ project (${PROJECT_NAME} VERSION 1.0.0)
 
 # add source files here
 set(SOURCES
-    src/main.c)
+    src/main.cpp)
 
 # include header file directories
 include_directories(${CMAKE_SYSROOT}/usr/include/
